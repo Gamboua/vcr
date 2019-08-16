@@ -14,24 +14,24 @@ from http_client import get_client
     Só um detalhe. Se vc trocar o método, vai precisar gerar de novo.
     Se vc mudar algum parâmetro, vai precisar gerar de novo.
 '''
-@pytest.mark.vcr()
-def test_get_client_should_return_json_response():
-    url = 'https://jsonplaceholder.typicode.com/todos/1'
+# @pytest.mark.vcr()
+# def test_get_client_should_return_json_response():
+#     url = 'https://jsonplaceholder.typicode.com/todos/1'
 
-    r = requests.get(
-        url=url
-    )
+#     r = requests.get(
+#         url=url
+#     )
 
 '''
-    Esse é o decorador para usar.
-    Ele pode vir com o caminho do arquivo yaml ou
-    caso ele tenha o mesmo nome do arquivo pode chamar
-    o método vazio
-    @vcr.use_cassette
+    Esse é o decorador para usar o yaml criado.
+    Ele pode vir com o caminho do arquivo yaml ou,
+    caso ele tenha o mesmo nome do arquivo, pode chamar
+    o método vazio:
+    @vcr.use_cassette()
     def test_get_client_should_return_json_response()
 '''
-@vcr.use_cassette('tests/cassettes/test_get_client_should_return_json_response.yaml')
-def test_get_client_should_return_json_response_successfuly():
+@vcr.use_cassette()
+def test_get_client_should_return_json_response():
     r = get_client()
 
     assert isinstance(r, dict)
